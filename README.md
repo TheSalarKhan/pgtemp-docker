@@ -3,6 +3,8 @@
 pgtemp (https://github.com/boustrophedon/pgtemp) is an amazing project that runs a server which spawns a new postgres instance on every connection.
 This allows it to be used for scenarios like unit-tests where each tests requires its own empty database.
 
+This repository just runs pgtemp inside a container and exposes it on port 6543. The directory used for postgres data is `/tmp` within the container, and that is mounted on a ramdisk using `tmpfs` so anything that writes into the database will write into RAM. This was just done to make things a little bit fast while assuming that a single test won't create huge amounts of data.
+
 ## Usage
 
 The usage is pretty simple. Just run `docker-compose up` and it will build and spin up a container that listens on port `6543` on your host.
