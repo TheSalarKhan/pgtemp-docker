@@ -47,6 +47,12 @@ RUN sudo apt-get install -y curl && \
 # add cargo bin and postgres initdb to path
 ENV PATH="/usr/lib/postgresql/14/bin:$PATH"
 
+USER postgres
+
+# update postgres conf
+COPY postgresql.override.conf /postgresql.override.conf
+RUN cat /postgresql.override.conf >> /etc/postgresql/14/main/postgresql.conf
+
 # switch back to root for running supervisord
 USER root
 

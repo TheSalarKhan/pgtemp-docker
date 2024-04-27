@@ -5,3 +5,11 @@ services:
     build: .
     ports:
       - "6543:6543"
+    volumes:
+      - ramdisk:/tmp
+
+volumes:
+  ramdisk:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
